@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Components てすと</title>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="css/main.css">
+
+</head>
+<body>
+
+<div id="header">
+  <button data-bind="click: addCard">追加</button>
+  <input type="text" value="たいとるですよー" id="cardTitle">
+</div>
+
+<ul data-bind="foreach: cards">
+  <card params="data: $data"></card>
+</ul>
+
+<script>
+
+ko.components.register('card', {
+  viewModel: function(params) {
+    var self = this;
+    self.title = params.data.title;
+    self.date = params.data.date;
+  },
+  template:"<li><p data-bind='text: title' class='card-title'></p><p data-bind='text: date' class='card-date'></p></li>"
+});
+
+var cardData = [
+  { title:"春はあけぼの。", date:"2015/01/01" },
+  { title:"やうやうしろくなりゆく山ぎは、", date:"2015/02/01" },
+  { title:"すこしあかりて、", date:"2015/03/01" },
+  { title:"紫だちたる雲のほそくたなびきたる。", date:"2015/04/01" }
+]
+
+function callTime(){
+  var date = new Date()
+  var str = "時刻 ";
+  str += date.getHours() + ":";
+  str += date.getMinutes() + ":";
+  str += date.getSeconds();
+  return str;
+}
+
+function AppViewModel() {
+    var self = this;
+    self.cards = ko.observableArray(cardData);
+
+    self.addCard = function() {
+      cardTitle = document.getElementById("cardTitle").value;
+      self.cards.unshift({ title: cardTitle, date: callTime() });
+    };
+}
+
+ko.applyBindings(new AppViewModel()); 
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+body,ul,li,p { margin: 0; padding: 0; font-family: sans-serif;}
+ul { padding: 5px; background-color: #E0E0E0; }
+li { list-style: none; }
+
+#header {padding: 15px; }
+button { margin-right: 15px; }
+
+card { margin: 10px; padding: 10px; display: block; background-color: #fff; }
+.card-title { color: #666; margin-bottom: 2px; font-size: 20px; font-weight: bold; }
+.card-date  { color: #999; font-size: 12px; }

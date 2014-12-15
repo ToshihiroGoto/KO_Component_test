@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <script>
+    document.createElement('test');
+  </script>
+</head>
+<body>
+
+<test params="message:'ふるい IE でも動ごきますよー'"></test>
+
+<script>
+
+  ko.components.register('test', {
+    viewModel: function(params){
+      var self = this;
+      self.message = params.message;
+    },
+    template: "<p data-bind='text:message'></p>"
+  });
+
+  ko.applyBindings();
+</script>
+
+</body>
+</html>

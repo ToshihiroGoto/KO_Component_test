@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <script>
+    document.createElement('test');
+  </script>
+</head>
+<body>
+
+<test params="message:'test タグに test2 のコンポーネントを適応しますよー'"></test>
+
+<script>
+
+  ko.components.getComponentNameForNode = function(node) {
+    var tagNameLower = node.tagName && node.tagName.toLowerCase();
+
+    if (ko.components.isRegistered(tagNameLower)) {
+      return tagNameLower;
+    } else if (tagNameLower === "test") {
+      return "test2";
+    } else {
+      return null;
+    }
+  }
+
+  ko.components.register('test2', {
+    viewModel: function(params){
+      var self = this;
+      self.message = params.message;
+    },
+    template: "<p data-bind='text:message' style='color:red'></p>"
+  });
+
+  ko.applyBindings();
+</script>
+
+</body>
+</html>
